@@ -18,6 +18,7 @@ pipeline {
                     '''
             }
         }
+        }
         stage('Run tests') {
             steps {
                 dir('Flask_project_1') {
