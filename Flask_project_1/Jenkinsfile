@@ -11,8 +11,11 @@ pipeline {
         stage('Install dependencies') {
             steps {
                 dir('Flask_project_1') {
-                    sh 'pip3 install -r requirements.txt'
-                }
+                    sh '''
+                        python3 -m venv venv
+                        . venv/bin/activate
+                        pip install -r requirements.txt
+                    '''
             }
         }
         stage('Run tests') {
