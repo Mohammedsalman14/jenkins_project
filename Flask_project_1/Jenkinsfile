@@ -41,7 +41,7 @@ pipeline {
                     sh '''
                         set -e
                         . ${VENV_DIR}/bin/activate
-                        exec python3 app.py
+                          python3 app.py
                     '''
                 }
             }
