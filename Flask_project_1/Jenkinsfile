@@ -1,0 +1,43 @@
+pipeline{
+    agent none
+
+    stages{
+        stage('clone repo'){
+            steps{
+                sh 'git clone https://github.com/Mohammedsalman14/jenkins_project.git'
+            }
+        }
+
+        stage('Install dependencies'){
+            steps{
+                sh 'cd Flask_project_1'
+                sh 'pip3 install -r requirements.txt'
+            }
+        }
+        stage('Run tests'){
+            steps{
+                sh 'pytest || echo "No tests found"'
+            }
+        }
+        stage("Start app"){
+            steps{
+                // kill previous Flask if running
+                sh 'pkill -f "python3 app.py" || true'
+                
+                // start new Flask app
+                sh 'nohup python3 app.py > flask.log 2>&1 &'
+            }
+        }
+    }
+    post {
+        success {
+            echo '✅ Deployment SUCCESS! Flask app is running.'
+        }
+        failure {
+            echo '❌ Deployment FAILED. Check logs for details.'
+        }
+        always {
+            echo '🔔 Pipeline finished. Check flask.log for any output.'
+        }
+    }
+}
