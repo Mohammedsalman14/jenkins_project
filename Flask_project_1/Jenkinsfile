@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        stage('Clone repo') {
+        stage('Checkout') {
             steps {
                 git branch: 'main',
                     url: 'https://github.com/Mohammedsalman14/jenkins_project.git'
@@ -25,10 +25,7 @@ pipeline {
         stage('Start app') {
             steps {
                 dir('Flask_project_1') {
-                    // kill previous Flask if running
                     sh 'pkill -f "python3 app.py" || true'
-                    
-                    // start new Flask app
                     sh 'nohup python3 app.py > flask.log 2>&1 &'
                 }
             }
