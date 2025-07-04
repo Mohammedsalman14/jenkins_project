@@ -27,7 +27,7 @@ pipeline {
             steps {
                 dir('Flask_project_1') {
                     sh '''
-                        . ${VENV_DIR}/bin/activate
+                        
                         pytest || echo "No tests found"
                     '''
                 }
@@ -37,8 +37,7 @@ pipeline {
             steps {
                 dir('Flask_project_1') {
                     sh '''
-                        pkill -f "python app.py" || true
-                        ${VENV_DIR}/bin/python app.py > flask.log 2>&1 &
+                        python3 app.py
                     '''
                 }
             }
