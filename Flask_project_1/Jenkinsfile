@@ -29,8 +29,8 @@ pipeline {
         stage('Start app') {
             steps {
                 dir('Flask_project_1') {
-                    sh 'pkill -f "python3 app.py" || true'
-                    sh 'nohup python3 app.py > flask.log 2>&1 &'
+                    sh 'python3 app.py'
+                    
                 }
             }
         }
