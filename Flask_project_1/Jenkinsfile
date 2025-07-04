@@ -29,7 +29,10 @@ pipeline {
         stage('Start app') {
             steps {
                 dir('Flask_project_1') {
-                    sh 'python3 app.py'
+                     sh '''
+                pkill -f "python app.py" || true
+                venv/bin/python app.py > flask.log 2>&1 &
+            '''
                     
                 }
             }
