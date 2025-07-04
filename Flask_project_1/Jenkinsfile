@@ -1,17 +1,20 @@
 pipeline{
-    agent none
+    agent any
 
     stages{
         stage('clone repo'){
             steps{
-                sh 'git clone https://github.com/Mohammedsalman14/jenkins_project.git'
+                git  'https://github.com/Mohammedsalman14/jenkins_project.git'
             }
         }
 
         stage('Install dependencies'){
             steps{
-                sh 'cd Flask_project_1'
-                sh 'pip3 install -r requirements.txt'
+                sh '''
+                    cd Flask_project_1
+                    pip3 install -r requirements.txt
+                '''
+
             }
         }
         stage('Run tests'){
